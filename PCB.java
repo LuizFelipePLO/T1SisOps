@@ -42,7 +42,7 @@ public class PCB {
                 break;
 
             case "sub":
-                acc += Integer.parseInt(tokens[1].substring(1));
+                acc -= Integer.parseInt(tokens[1].substring(1));
                 break;
 
             case "mult":
@@ -76,20 +76,20 @@ public class PCB {
                 break;
 
             case "syscall":
-            switch (Integer.parseInt(tokens[1])) {
-                case 0:
-                    System.exit(0);
-                    break;
-                case 1:
-                    System.out.println(acc);
-                    break;
-                case 2:
-                    acc = Integer.parseInt(System.console().readLine());
-                    break;
-                default:
-                    System.err.println("Unknown syscall: " + tokens[1]);
-                    break;
-            }
+                switch (Integer.parseInt(tokens[1])) {
+                    case 0:
+                        System.exit(0);
+                        break;
+                    case 1:
+                        System.out.println(acc);
+                        break;
+                    case 2:
+                        acc = Integer.parseInt(System.console().readLine());
+                        break;
+                    default:
+                        System.err.println("Unknown syscall: " + tokens[1]);
+                        break;
+                }
                 break;
 
             default:
