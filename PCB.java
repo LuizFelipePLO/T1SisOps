@@ -8,6 +8,7 @@ public class PCB {
     private int remainingTime;
     private int waitingTime;
     private int turnaroundTime;
+    private int currentTime;
     private ArrayList<String> instructions;
     private int pc;
     private int acc;
@@ -161,6 +162,14 @@ public class PCB {
 
     public void setTurnaroundTime(int turnaroundTime) {
         this.turnaroundTime = turnaroundTime;
+    }
+
+    public int getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(int currentTime) {
+        this.currentTime = currentTime;
     }
 
     public ArrayList<String> getInstructions() {
