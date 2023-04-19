@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class PCB {
     private int id;
@@ -12,10 +12,10 @@ public class PCB {
     private ArrayList<String> instructions;
     private int pc;
     private int acc;
-    private int[] PMEM;
+    private HashMap<String, Integer> pMEM = new HashMap<String, Integer>();
 
     public PCB(int id, int priority, int arrivalTime, int burstTime, int remainingTime, int waitingTime,
-            int turnaroundTime, int pc, int acc, int[] pMEM) {
+            int turnaroundTime, int pc, int acc, HashMap<String, Integer> pMEM) {
         this.id = id;
         this.priority = priority;
         this.arrivalTime = arrivalTime;
@@ -25,11 +25,11 @@ public class PCB {
         this.turnaroundTime = turnaroundTime;
         this.pc = pc;
         this.acc = acc;
-        PMEM = pMEM;
+        this.pMEM = pMEM;
     }
 
-    private int getIndex(String variable) {
-        return Integer.parseInt(variable.substring(1));
+    private int getValue(String variable) {
+        return pMEM.get(variable);
     }
 
     public void executeInstructions(String instruction) {
@@ -39,48 +39,48 @@ public class PCB {
 
         switch (opcode) {
             case "load":
-                acc = PMEM[getIndex(tokens[1])];
+                acc = getValue(tokens[1]);
                 break;
 
             case "store":
-                PMEM[getIndex(tokens[1])] = acc;
+                pMEM.put(tokens[1], acc);
                 break;
 
             case "add":
-                acc += Integer.parseInt(tokens[1].substring(1));
+                acc += getValue(tokens[1]);
                 break;
 
             case "sub":
-                acc -= Integer.parseInt(tokens[1].substring(1));
+                acc -= getValue(tokens[1]);
                 break;
 
             case "mult":
-                acc *= PMEM[getIndex(tokens[1])];
+                acc *= getValue(tokens[1]);
                 break;
 
             case "div":
-                acc /= PMEM[getIndex(tokens[1])];
+                acc /= getValue(tokens[1]);
                 break;
 
             case "BRZERO":
                 if (acc == 0) {
-                    pc = Integer.parseInt(tokens[1].substring(1)) - 1;
+                    pc = getValue(tokens[1]) - 1;
                 }
                 break;
 
             case "BRANY":
-                pc = Integer.parseInt(tokens[1].substring(1)) - 1;
+                pc = getValue(tokens[1]) - 1;
                 break;
 
             case "BRPOS":
                 if (acc > 0) {
-                    pc = Integer.parseInt(tokens[1].substring(1)) - 1;
+                    pc = getValue(tokens[1]) - 1;
                 }
                 break;
 
             case "BRNEG":
                 if (acc < 0) {
-                    pc = Integer.parseInt(tokens[1].substring(1)) - 1;
+                    pc = getValue(tokens[1]) - 1;
                 }
                 break;
 
@@ -196,11 +196,11 @@ public class PCB {
         this.acc = acc;
     }
 
-    public int[] getPMEM() {
-        return PMEM;
+    public HashMap<String, Integer> getPMEM() {
+        return pMEM;
     }
 
-    public void setPMEM(int[] pMEM) {
-        PMEM = pMEM;
+    public void setPMEM(HashMap<String, Integer> pMEM) {
+        this.pMEM = pMEM;
     }
 }

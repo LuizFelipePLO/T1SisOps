@@ -3,7 +3,7 @@ import java.util.*;
 //MUDAR: Para funcionar está sendo preciso fornecer manualmente o tempo de chegada e execução
 public class EscalonadorRR {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); 
         System.out.print("Informe o valor do quantum: ");
         int quantum = sc.nextInt();
 
