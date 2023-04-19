@@ -5,6 +5,43 @@ public class App {
 
     public static void main(String[] args) {
 
+        String[] fileNames = { "T1SisOps\\ex_pgms_tp1\\prog1.txt", "T1SisOps\\ex_pgms_tp1\\prog2.txt",
+                "T1SisOps\\ex_pgms_tp1\\prog3.txt" };
+
+        System.out.println("Escolha o modelo do escalonador:");
+        System.out.println("1. Shortest Job First");
+        System.out.println("2. Round Robin");
+
+        Scanner menuScanner = new Scanner(System.in);
+        int option = menuScanner.nextInt();
+
+        switch (option) {
+            case 1:
+                try {
+                    for (int i = 0; i < fileNames.length; i++) {
+                        readData(readFile(fileNames[i]));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                EscalonadorSJF sjf = new EscalonadorSJF();
+                break;
+
+            case 2:
+                try {
+                    for (int i = 0; i < fileNames.length; i++) {
+                        readData(readFile(fileNames[i]));
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+
+            default:
+                System.out.println("Valor inválido. Renicie o programa.");
+                break;
+        }
+        menuScanner.close();
     }
 
     public static List<String> readFile(String fileName) throws IOException {
