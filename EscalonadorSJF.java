@@ -5,7 +5,7 @@ public class EscalonadorSJF implements Escalonador{
     private List<PCB> readyQueue;
     private List<PCB> waitQueue;
 
-    public void SJFScheduler() {
+    public EscalonadorSJF() {
         readyQueue = new ArrayList<>();
         waitQueue = new ArrayList<>();
     }
@@ -61,6 +61,7 @@ public class EscalonadorSJF implements Escalonador{
     }
 
     public void imprimir() {
-
+        System.out.println("readyQueue");
+        this.readyQueue.forEach(PCB::print);
     }
 }

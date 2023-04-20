@@ -1,3 +1,4 @@
+import java.lang.reflect.Field;
 import java.util.*;
 
 public class PCB {
@@ -202,5 +203,29 @@ public class PCB {
 
     public void setPMEM(HashMap<String, Integer> pMEM) {
         this.pMEM = pMEM;
+    }
+
+    public void print() {
+        StringBuilder result = new StringBuilder();
+        for (Field f: getClass().getDeclaredFields()) {
+            try {
+                result
+                        .append(f.getName())
+                        .append(" : ")
+                        .append(f.get(this))
+                        .append(System.getProperty("line.separator"));
+            }
+            catch (IllegalStateException ise) {
+                result
+                        .append(f.getName())
+                        .append(" : ")
+                        .append("[cannot retrieve value]")
+                        .append(System.getProperty("line.separator"));
+            }
+            // nope
+            catch (IllegalAccessException iae) {}
+        }
+        System.out.println(result.toString());
+
     }
 }

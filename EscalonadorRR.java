@@ -6,7 +6,7 @@ public class EscalonadorRR implements Escalonador {
     private List<PCB> waitQueue;
     private int timeSlice;
 
-    public void EscalonadorRoundRobin(int timeSlice) {
+    public void EscalonadorRoundRobin() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Informe o valor do quantum: ");
         this.timeSlice = sc.nextInt();
@@ -76,7 +76,8 @@ public class EscalonadorRR implements Escalonador {
         }
     }
     public void imprimir() {
-
+        System.out.println("readyQueue");
+        this.readyQueue.forEach(PCB::print);
     }
 
 }

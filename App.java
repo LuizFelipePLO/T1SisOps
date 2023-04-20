@@ -19,26 +19,39 @@ public class App {
         Scanner menuScanner = new Scanner(System.in);
         int option = menuScanner.nextInt();
 
+        List<PCB> reading = new ArrayList<>();
+
+        try {
+            for (int i = 0; i < fileNames.length; i++) {
+                reading.add(new PCB(
+                        i,
+                        2,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        0,
+                        readData(readFile(fileNames[i]))));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Escalonador e;
+
         switch (option) {
             case 1:
-                try {
-                    for (int i = 0; i < fileNames.length; i++) {
-                        readData(readFile(fileNames[i]));
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                EscalonadorSJF sjf = new EscalonadorSJF();
+                e = new EscalonadorSJF();
+                reading.forEach(e::addProcess);
+                HandleExecution(e);
                 break;
 
             case 2:
-                try {
-                    for (int i = 0; i < fileNames.length; i++) {
-                        readData(readFile(fileNames[i]));
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                e = new EscalonadorRR();
+                ((EscalonadorRR) e).EscalonadorRoundRobin();
+                reading.forEach(e::addProcess);
+                HandleExecution(e);
                 break;
 
             default:
@@ -51,11 +64,12 @@ public class App {
     public static void HandleExecution(Escalonador e) {
         int option;
         while(!e.isDone()){
+            Scanner menuScanner = new Scanner(System.in);
             System.out.println("Escolha o que fazer:");
             System.out.println("1. rodar um ciclo");
             System.out.println("2. imprimir informações");
-            Scanner menuScanner = new Scanner(System.in);
             option = menuScanner.nextInt();
+            menuScanner.close();
             switch (option) {
                 case 1:
                     e.run();
