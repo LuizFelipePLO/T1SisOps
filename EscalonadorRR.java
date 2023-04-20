@@ -9,7 +9,7 @@ public class EscalonadorRR implements Escalonador {
     public void EscalonadorRoundRobin() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Informe o valor do quantum: ");
-        this.timeSlice = sc.nextInt();
+        this.timeSlice = Integer.parseInt(sc.nextLine());
         readyQueue = new ArrayList<>();
         waitQueue = new ArrayList<>();
         sc.close();

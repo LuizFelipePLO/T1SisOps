@@ -17,7 +17,7 @@ public class App {
         System.out.println("2. Round Robin");
 
         Scanner menuScanner = new Scanner(System.in);
-        int option = menuScanner.nextInt();
+        int option = Integer.parseInt(menuScanner.nextLine());
 
         List<PCB> reading = new ArrayList<>();
 
@@ -58,18 +58,18 @@ public class App {
                 System.out.println("Valor inválido. Renicie o programa.");
                 break;
         }
-        menuScanner.close();
     }
 
     public static void HandleExecution(Escalonador e) {
         int option;
         while(!e.isDone()){
-            Scanner menuScanner = new Scanner(System.in);
+            e.imprimir();
+            e.run();
+            /*Scanner menuScanner = new Scanner(System.in);
             System.out.println("Escolha o que fazer:");
             System.out.println("1. rodar um ciclo");
             System.out.println("2. imprimir informações");
-            option = menuScanner.nextInt();
-            menuScanner.close();
+            option = Integer.parseInt(menuScanner.nextLine());
             switch (option) {
                 case 1:
                     e.run();
@@ -79,7 +79,7 @@ public class App {
                     break;
                 default:
                     System.out.println("Opção inválida");
-            }
+            }*/
         }
         System.out.println("Acabaram os programas");
     }
