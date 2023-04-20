@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class EscalonadorSJF {
+public class EscalonadorSJF implements Escalonador{
 
     private List<PCB> readyQueue;
     private List<PCB> waitQueue;
@@ -16,6 +16,10 @@ public class EscalonadorSJF {
         } else {
             waitQueue.add(process);
         }
+    }
+
+    public boolean isDone(){
+        return !readyQueue.isEmpty() && !waitQueue.isEmpty();
     }
 
     public void run() {
@@ -54,5 +58,9 @@ public class EscalonadorSJF {
 
             }
         }
+    }
+
+    public void imprimir() {
+
     }
 }

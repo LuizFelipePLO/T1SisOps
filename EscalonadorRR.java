@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class EscalonadorRR {
+public class EscalonadorRR implements Escalonador {
 
     private List<PCB> readyQueue;
     private List<PCB> waitQueue;
@@ -13,6 +13,10 @@ public class EscalonadorRR {
         readyQueue = new ArrayList<>();
         waitQueue = new ArrayList<>();
         sc.close();
+    }
+
+    public boolean isDone(){
+        return !readyQueue.isEmpty() && !waitQueue.isEmpty();
     }
 
     public void addProcess(PCB process) {
@@ -70,6 +74,9 @@ public class EscalonadorRR {
             waitQueue.removeAll(arrivedProcessesDuringExecution);
             readyQueue.addAll(arrivedProcessesDuringExecution);
         }
+    }
+    public void imprimir() {
+
     }
 
 }

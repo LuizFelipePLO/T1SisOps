@@ -4,9 +4,13 @@ import java.util.*;
 public class App {
 
     public static void main(String[] args) {
+        String currDir = System.getProperty("user.dir");
 
-        String[] fileNames = { "T1SisOps\\ex_pgms_tp1\\prog1.txt", "T1SisOps\\ex_pgms_tp1\\prog2.txt",
-                "T1SisOps\\ex_pgms_tp1\\prog3.txt" };
+        String[] fileNames = {
+                currDir + File.separator + "ex_pgms_tp1" + File.separator + "prog1.txt",
+                currDir + File.separator + "ex_pgms_tp1" + File.separator + "prog2.txt",
+                currDir + File.separator + "ex_pgms_tp1" + File.separator + "prog3.txt"
+        };
 
         System.out.println("Escolha o modelo do escalonador:");
         System.out.println("1. Shortest Job First");
@@ -42,6 +46,28 @@ public class App {
                 break;
         }
         menuScanner.close();
+    }
+
+    public static void HandleExecution(Escalonador e) {
+        int option;
+        while(!e.isDone()){
+            System.out.println("Escolha o que fazer:");
+            System.out.println("1. rodar um ciclo");
+            System.out.println("2. imprimir informações");
+            Scanner menuScanner = new Scanner(System.in);
+            option = menuScanner.nextInt();
+            switch (option) {
+                case 1:
+                    e.run();
+                    break;
+                case 2:
+                    e.imprimir();
+                    break;
+                default:
+                    System.out.println("Opção inválida");
+            }
+        }
+        System.out.println("Acabaram os programas");
     }
 
     public static List<String> readFile(String fileName) throws IOException {
